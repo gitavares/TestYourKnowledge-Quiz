@@ -1,0 +1,1 @@
+exports.urlToPreview = 'http://localhost:8888/';
