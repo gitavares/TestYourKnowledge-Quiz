@@ -1,0 +1,74 @@
+// colors
+$color-primary: #FFDE2B;
+
+$color-secondary: #707070;
+$color-secondary-light-1: #E6E6E6;
+$color-secondary-light-2: #DBDBDB;
+$color-secondary-light-3: #D1D1D1;
+
+$color-white: #FFF;
+$color-black: #000;
+
+$color-shadow: rgba(255, 222, 43, .9);
+
+$font-color-default: $color-secondary;
+
+$button-color-green: #28D100;
+$button-color-red: #FF4F38;
+
+// fonts size
+$font-size-small: 1.4rem;
+$font-size-default: 1.6rem;
+$font-size-title-form: 1.8rem;
+$font-size-brand-main: 4rem;
+$font-size-brand-default: 2.2rem;
+$font-size-title: 3rem;
+$font-size-subtitle: 2.4rem;
+$font-size-score: 4rem;
+
+// fonts family
+$font-family-brand: 'Roboto', sans-serif;
+$font-family-default: 'Nanum Gothic', sans-serif;
+
+
+// mixins
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) { @content }; //600px divided by 16px
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) { @content }; //900px
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) { @content }; //1200px
+    }
+    @if $breakpoint == big-desktop {
+        @media only screen and (min-width: 112.5em) { @content }; //1800px
+    }
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; // the default size is 16px, but it's easier to calculate the rem with 10px. so, 10/16 = 62.5%
+
+    @include respond(tab-land) { // considering width < 900px
+        font-size: 56.25%; // 9px/16px
+    }
+
+    @include respond(tab-port) { // considering width < 600px
+        font-size: 50%; // 8px/16px
+    }
+}
+
+body {
+    box-sizing: border-box;
+    font-family: $font-family-default;
+    color: $font-color-default;
+}

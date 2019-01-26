@@ -1,0 +1,35 @@
+.form-group {
+    margin-bottom: 1.8rem;
+}
+
+.form-input {
+    border: 1px solid $color-secondary-light-3;
+    padding: 1rem;
+    outline: none;
+    width: 100%;
+    font-size: $font-size-default;
+}
+
+.form-input:focus {
+    border: 1px solid $color-primary;
+}
+
+.form-button {
+    background-color: $color-primary;
+    padding: 1rem;
+    width: 100%;
+    font-size: $font-size-default;
+    border: 1px solid $color-secondary-light-3;
+    outline: none;
+    color: $font-color-default;
+}
+
+.form-message-box-error {
+    
+}
+
+.error-message {
+    color: red;
+    font-size: $font-size-small;
+}
+

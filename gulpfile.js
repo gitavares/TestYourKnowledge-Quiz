@@ -12,10 +12,10 @@ mixins = require('postcss-mixins'),
 colorFunctions = require('postcss-color-function');
 
 gulp.task('styles', function() {
-  return gulp.src(settings.themeLocation + 'css/style.css')
+  return gulp.src(settings.appLocation + 'assets/css/style.css')
     .pipe(postcss([cssImport, mixins, cssvars, nested, rgba, colorFunctions, autoprefixer]))
     .on('error', (error) => console.log(error.toString()))
-    .pipe(gulp.dest(settings.themeLocation));
+    .pipe(gulp.dest(settings.appLocation));
 });
 
 gulp.task('scripts', function(callback) {
@@ -39,12 +39,12 @@ gulp.task('watch', function() {
   gulp.watch('./**/*.php', function() {
     browserSync.reload();
   });
-  gulp.watch(settings.themeLocation + 'css/**/*.css', ['waitForStyles']);
-  gulp.watch([settings.themeLocation + 'js/modules/*.js', settings.themeLocation + 'js/scripts.js'], ['waitForScripts']);
+  gulp.watch(settings.appLocation + 'assets/css/**/*.css', ['waitForStyles']);
+  gulp.watch([settings.appLocation + 'assets/js/modules/*.js', settings.appLocation + ' assets/js/scripts.js'], ['waitForScripts']);
 });
 
 gulp.task('waitForStyles', ['styles'], function() {
-  return gulp.src(settings.themeLocation + 'style.css')
+  return gulp.src(settings.appLocation + 'assets/css/style.css')
     .pipe(browserSync.stream());
 });
 

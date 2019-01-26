@@ -1,0 +1,74 @@
+.container-login {
+    padding: 8.4rem;
+    
+    display: grid;
+    grid-template-rows: repeat(1, max-content);
+    grid-template-columns: .5fr 1fr;
+    // grid-gap: 8.4rem;
+
+    grid-template-areas: "head main";
+}
+
+.header-login {
+    grid-area: head;
+}
+
+.main-login {
+    grid-area: main;
+}
+
+.brand-title-main,
+.brand-title-main-link,
+.brand-title-main-link:hover,
+.brand-title-main-link:focus,
+.brand-title-main-link:active {
+    font-size: $font-size-brand-main;
+    text-shadow: .3rem .3rem 0 $color-shadow;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: $font-family-brand;
+    text-decoration: none;
+    color: $font-color-default;
+}
+
+.box-form {
+    border: 1px solid $color-secondary-light-3;
+    padding: 2.6rem;
+    box-shadow:  .3rem .3rem 0 $color-shadow;
+    width: 45.8rem;
+}
+
+.title-box-form {
+    text-align: center;
+    margin-bottom: 1.8rem;
+}
+
+.title-form {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: $font-size-title-form;
+    font-family: $font-family-brand;
+}
+
+.link-box-form {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.link-back-box-form {
+    margin-top: 4rem;
+}
+
+.link-form {
+    color: $font-color-default;
+    font-size: $font-size-default;
+    font-weight: 400;
+    font-family: $font-family-default;
+}
+
+.link-form:hover,
+.link-form:focus {
+    text-decoration: none;
+}
+
+
