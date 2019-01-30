@@ -1,10 +1,11 @@
-<?php include "assets/inc/header.php"; ?>
-<?php
-    include "connection.php";
-    include "functions.php";
+<?php include "includes/header.php"; ?>
+<?php include "includes/connection.php"; ?>
+<?php include "functions/users.php"; ?>
 
-    // $message = '';
-    $message = createUser();
+<?php
+
+$message = createUser();
+
 ?>
 <body>
     <div class="container-login">
@@ -19,11 +20,11 @@
                 <div>
                     <form action="register.php" method="post">
                         <div class="form-group">
-                            <input type="text" name="firstName" class="form-input" placeholder="First Name" pattern="[A-Za-z]{2,}" title="Must have 2 letters or more" minlength=2 autofocus required
+                            <input type="text" name="firstName" class="form-input" placeholder="First Name" pattern="[A-Za-z ]{2,}" title="Must have 2 letters or more" minlength=2 autofocus required
                             value="<?php echo isset($_POST["firstName"]) ? $_POST["firstName"] : ""; ?>">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="lastName" class="form-input" placeholder="Last Name" pattern="[A-Za-z]{2,}" title="Must have 2 letters or more" minlength=2 required
+                            <input type="text" name="lastName" class="form-input" placeholder="Last Name" pattern="[A-Za-z ]{2,}" title="Must have 2 letters or more" minlength=2 required
                             value="<?php echo isset($_POST["lastName"]) ? $_POST["lastName"] : ""; ?>">
                         </div>
                         <div class="form-message-box-error">

@@ -1,36 +1,39 @@
-<?php include "includes/header.php"; ?>
-<?php include "includes/connection.php"; ?>
-<?php include "functions/users.php"; ?>
+<?php include "../includes/header-admin.php"; ?>
+<?php include "../functions/users.php"; ?>
 
 <?php
 
 getSession();
-if($_SESSION['admin']) {
-    redirectAdminDashboard();
+if(!$_SESSION['admin']) {
+    redirectDashboard();
 }
 
 ?>
 
 <body>
     <div class="container">
-        <?php include "includes/menu-user.php"; ?>
+        <?php include "../includes/menu-admin.php"; ?>
         <main class="main">
-            <?php include "includes/welcome.php"; ?>
+            <?php include "../includes/welcome.php"; ?>
             <div class="page-title-box">
-                <h2 class="page-title">Dashboard</h2>
+                <h2 class="page-title">Admin Dashboard</h2>
             </div>
-            <div class="statistic-user-box-container">
-                <div id="test-made" class="statistic-user-box">
-                    <span class="statistic-user-box-title">You made</span>
-                    <span class="statistic-user-box-result">3 Tests</span>
+            <div class="statistic-admin-box-container">
+                <div id="doing-test" class="statistic-user-box">
+                    <span class="statistic-user-box-title">Doing this test now</span>
+                    <span class="statistic-user-box-result">3 users</span>
                 </div>
-                <div id="average-score" class="statistic-user-box">
-                    <span class="statistic-user-box-title">Your average score is</span>
-                    <span class="statistic-user-box-result">8.5</span>
+                <div id="passed-test" class="statistic-user-box">
+                    <span class="statistic-user-box-title">Users that passed</span>
+                    <span class="statistic-user-box-result">35 users</span>
                 </div>
-                <div id="better-than" class="statistic-user-box">
-                    <span class="statistic-user-box-title">You are better than</span>
-                    <span class="statistic-user-box-result">73% of the users</span>
+                <div id="not-passed-test" class="statistic-user-box">
+                    <span class="statistic-user-box-title">Users didn't passed</span>
+                    <span class="statistic-user-box-result">15 users</span>
+                </div>
+                <div id="test-average-score" class="statistic-user-box">
+                    <span class="statistic-user-box-title">Average score</span>
+                    <span class="statistic-user-box-result">7.1</span>
                 </div>
             </div>
             <div>

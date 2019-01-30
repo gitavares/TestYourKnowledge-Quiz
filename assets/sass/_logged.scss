@@ -1,0 +1,181 @@
+.container {
+    height: 100vh;
+
+    display: grid;
+    grid-template-rows: repeat(1, 100vh);
+    grid-template-columns: .25fr 1fr;
+
+    grid-template-areas: "side main";
+}
+
+.side {
+    grid-area: side;
+    background-color: $color-secondary-light-1;
+
+    display: grid;
+    grid-template-rows: .2fr 1fr .2fr;
+    grid-template-columns: repeat(1, 100%);
+    grid-template-areas: "header" 
+                         "main-menu" 
+                         "footer-menu"
+}
+
+.main {
+    grid-area: main;
+
+    padding: 2.9rem 2.4rem;
+}
+
+.header {
+    grid-area: header;
+
+    display: grid;
+    grid-template-rows: repeat(1, 10rem);
+    grid-template-columns: 1fr .2fr;
+    grid-template-areas: "brand collapsed-menu";
+}
+
+.main-menu {
+    width: 100%;
+    grid-area: main-menu;
+    align-content: stretch;
+}
+
+.footer-menu {
+    width: 100%;
+    grid-area: footer-menu;  
+    align-self: flex-end;
+}
+
+.brand {
+    padding: 1rem;
+    grid-area: brand;
+}
+
+.collapsed-menu {
+    grid-area: collapsed-menu;
+    justify-self: right;
+    align-self: flex-end;
+}
+
+.brand-title,
+.brand-title-link,
+.brand-title-link:hover,
+.brand-title-link:focus,
+.brand-title-link:active {
+    font-size: $font-size-brand-default;
+    text-shadow: .2rem .2rem 0 $color-shadow;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: $font-family-brand;
+    text-decoration: none;
+    color: $font-color-default;
+    outline: none;
+}
+
+.link-side-menu,
+.link-side-menu:link,
+.link-side-menu:visited {
+    display: inline-block;
+    color: $font-color-default;
+    text-decoration: none;
+    width: 100%;
+    padding: 1.7rem 2.4rem;
+    border-left: 3px solid $color-secondary-light-1;
+}
+
+.link-side-menu:hover,
+.link-side-menu:focus,
+.link-side-menu:active {
+    display: inline-block;
+    width: 100%;
+    border-left: 3px solid $color-primary;
+    background-color: $color-secondary-light-2;
+    outline: none;
+}
+
+.page-title {
+    font-size: $font-size-title;
+    font-weight: 700;
+    
+    &-box {
+        width: 100%;
+        margin: 3.1rem 0 1.7rem 0;
+    }
+}
+
+.statistic-user-box {
+    border: 1px solid $color-secondary-light-3;
+    padding: 1rem 1.6rem 1.5rem 1.6rem;
+    box-shadow:  .3rem .3rem 0 $color-shadow;
+
+    &-container {
+        width: 100%;
+        display: grid;
+
+        grid-template-rows: repeat(1, min-content);
+        grid-template-columns: repeat(3, .3fr);
+        grid-template-areas: "made average better";
+
+        justify-content: space-between;
+    }
+
+    &-title {
+        display: block;
+        margin-bottom: 1.5rem;
+    }
+
+    &-result {
+        font-size: $font-size-subtitle;
+    }
+}
+
+#test-made {
+    grid-area: made;
+}
+
+#average-score {
+    grid-area: average;
+}
+
+#better-than {
+    grid-area: better;
+}
+
+.statistic-admin-box-container {
+    width: 100%;
+    display: grid;
+
+    grid-template-rows: repeat(1, min-content);
+    grid-template-columns: repeat(4, .2fr);
+    grid-template-areas: "doing passed not-passed test-average";
+
+    justify-content: space-between;
+}
+
+#doing-test {
+    grid-area: doing;
+}
+
+#passed-test {
+    grid-area: passed;
+}
+
+#not-passed-test {
+    grid-area: not-passed;
+}
+
+#test-average-score {
+    grid-area: test-average;
+}
+
+
+.subtitle-content {
+    display: block;
+    font-size: $font-size-subtitle;
+    margin: 2.9rem 0;
+}
+
+
+
+

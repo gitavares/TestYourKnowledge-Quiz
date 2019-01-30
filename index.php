@@ -1,8 +1,8 @@
-<?php include "assets/inc/header.php"; ?>
-<?php 
+<?php include "includes/header.php"; ?>
+<?php include "includes/connection.php"; ?>
+<?php include "functions/users.php"; ?>
 
-include "connection.php";
-include "functions.php";
+<?php 
 
 $message = login();
 

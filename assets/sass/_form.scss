@@ -14,14 +14,17 @@
     border: 1px solid $color-primary;
 }
 
-.form-button {
+.form-button, .form-button-small {
     background-color: $color-primary;
     padding: 1rem;
-    width: 100%;
     font-size: $font-size-default;
     border: 1px solid $color-secondary-light-3;
     outline: none;
     color: $font-color-default;
+}
+
+.form-button {
+    width: 100%;
 }
 
 .form-message-box-error {
@@ -31,5 +34,15 @@
 .error-message {
     color: red;
     font-size: $font-size-small;
+}
+
+.form-message-box {
+    margin: 2rem 0;
+}
+
+.message {
+    color: $font-color-default;
+    font-size: $font-size-default;
+    font-weight: 700;
 }
 
