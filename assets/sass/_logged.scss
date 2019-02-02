@@ -147,7 +147,7 @@
     display: grid;
 
     grid-template-rows: repeat(1, min-content);
-    grid-template-columns: repeat(4, .2fr);
+    grid-template-columns: repeat(4, .22fr);
     grid-template-areas: "doing passed not-passed test-average";
 
     justify-content: space-between;
@@ -169,12 +169,25 @@
     grid-area: test-average;
 }
 
+.subtitle-content, .title-test {
+    font-size: $font-size-subtitle;
+    margin: 2.9rem 1.5rem 2.9rem 0;
+}
 
 .subtitle-content {
     display: block;
-    font-size: $font-size-subtitle;
-    margin: 2.9rem 0;
 }
+
+.title-test-container {
+    display: block; 
+    margin-bottom: 4rem;
+}
+
+.test-stats {
+    margin-top: 4rem;
+    margin-bottom: 6.5rem;
+}
+
 
 
 

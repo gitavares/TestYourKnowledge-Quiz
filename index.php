@@ -1,6 +1,6 @@
-<?php include "includes/header.php"; ?>
-<?php include "includes/connection.php"; ?>
-<?php include "functions/users.php"; ?>
+<?php include "view/header.php"; ?>
+<?php include "model/connection.php"; ?>
+<?php include "model/users.php"; ?>
 
 <?php 
 

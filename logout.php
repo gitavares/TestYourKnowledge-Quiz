@@ -1,4 +1,4 @@
-<?php include "functions/users.php"?>
+<?php include "model/users.php"?>
 <?php 
     logout();
 ?>

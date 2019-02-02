@@ -1,6 +1,6 @@
-<?php include "includes/header.php"; ?>
-<?php include "includes/connection.php"; ?>
-<?php include "functions/users.php"; ?>
+<?php include "view/header.php"; ?>
+<?php include "model/connection.php"; ?>
+<?php include "model/users.php"; ?>
 
 <?php
 
@@ -15,9 +15,9 @@
 
 <body>
     <div class="container">
-        <?php include "includes/menu-user.php"; ?>
+        <?php include "view/menu-user.php"; ?>
         <main class="main">
-            <?php include "includes/welcome.php"; ?>
+            <?php include "view/welcome.php"; ?>
             <div class="page-title-box">
                 <h2 class="page-title">Change Password</h2>
             </div>

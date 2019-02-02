@@ -1,7 +1,7 @@
 <aside class="side">
     <div class="header">
         <div class="brand">
-            <h1><span class="brand-title"><a class="brand-title-link" href="dashboard.php" title="Back to Dahsboard Page">Test<br>Your<br>Knowledge</a></span></h1>
+            <h1><span class="brand-title"><a class="brand-title-link" href="admin-dashboard.php" title="Back to Dahsboard Page">Test<br>Your<br>Knowledge</a></span></h1>
         </div>
         <div class="collapsed-menu">=</div>
     </div>
@@ -12,8 +12,8 @@
         <a href="admin-users-list.php" title="Users" class="link-side-menu">Users</a>
     </div>
     <div class="footer-menu">               
-        <a href="../user-edit.php" title="Edit Profile" class="link-side-menu">Edit Profile</a>
-        <a href="../user-edit-password.php" title="Change Password" class="link-side-menu">Change Password</a>
+        <a href="../user-edit" title="Edit Profile" class="link-side-menu">Edit Profile</a>
+        <a href="../user-edit-password" title="Change Password" class="link-side-menu">Change Password</a>
         <a href="../logout.php" title="Logout" class="link-side-menu">Logout</a>
     </div>
 </aside>

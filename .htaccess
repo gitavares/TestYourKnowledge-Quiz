@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteRule ^(index|register|dashboard|user-edit|user-edit-password|make-a-test)$ $1.php [NC,L] 
+
+RewriteRule ^make-a-test/(\d+)$ make-a-test.php?testId=$1 [NC,L]

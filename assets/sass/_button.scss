@@ -1,0 +1,16 @@
+.form-button, .form-button-small, .link-button {
+    background-color: $color-primary;
+    padding: 1rem 2rem;
+    font-size: $font-size-default;
+    border: 1px solid $color-secondary-light-3;
+    outline: none;
+    color: $font-color-default;
+}
+
+.form-button {
+    width: 100%;
+}
+
+.link-button {
+    text-decoration: none;
+}
