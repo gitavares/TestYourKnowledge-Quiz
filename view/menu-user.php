@@ -11,7 +11,7 @@
     ?>
     <div class="main-menu">
         <a href="<?php echo getUrlDirPath(); ?>dashboard" title="Dashboard" class="link-side-menu">Dashboard</a>
-        <a href="<?php echo getUrlDirPath(); ?>make-a-test" title="Make a Test" class="link-side-menu">Make a Test</a>
+        <a href="<?php echo getUrlDirPath(); ?>take-a-test" title="Make a Test" class="link-side-menu">Take a Test</a>
     </div>
     <?php
         } else {

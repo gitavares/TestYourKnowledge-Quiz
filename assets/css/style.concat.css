@@ -20,6 +20,9 @@ body {
   font-size: 1.6rem;
   color: #707070; }
 
+.m-b-10 {
+  margin-bottom: 1rem; }
+
 .form-group {
   margin-bottom: 1.8rem; }
 
@@ -33,9 +36,74 @@ body {
 .form-input:focus {
   border: 1px solid #FFDE2B; }
 
-.form-button, .form-button-small {
-  background-color: #FFDE2B;
+.error-message {
+  color: red;
+  font-size: 1.4rem; }
+
+.form-message-box {
+  margin: 2rem 0; }
+
+.form-message-box-success {
+  margin: 2rem 0;
+  display: inline-block;
   padding: 1rem;
+  width: 100%;
+  color: #005e2a;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background-color: #9effc9;
+  border: 1px solid #005e2a; }
+
+.form-message-box-fail {
+  margin: 2rem 0;
+  display: inline-block;
+  padding: 1rem;
+  width: 100%;
+  color: #7e0000;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background-color: #ffb3b3;
+  border: 1px solid #7e0000; }
+
+.message {
+  color: #707070;
+  font-size: 1.6rem;
+  font-weight: 700; }
+
+.message-success {
+  display: inline-block;
+  width: 100%;
+  color: #005e2a;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background-color: #9effc9;
+  border: 1px solid #005e2a; }
+
+.message-fail {
+  display: inline-block;
+  width: 100%;
+  color: #7e0000;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background-color: #ffb3b3;
+  border: 1px solid #7e0000; }
+
+.label-text {
+  display: inline-block;
+  margin-bottom: .5rem; }
+
+table {
+  width: 100%;
+  margin-top: 3rem;
+  border-spacing: .5rem; }
+
+th, td {
+  padding: 1rem 0;
+  text-align: left; }
+
+.form-button, .form-button-small, .link-button {
+  background-color: #FFDE2B;
+  padding: 1rem 2rem;
   font-size: 1.6rem;
   border: 1px solid #D1D1D1;
   outline: none;
@@ -44,24 +112,8 @@ body {
 .form-button {
   width: 100%; }
 
-.error-message {
-  color: red;
-  font-size: 1.4rem; }
-
-.form-message-box {
-  margin: 2rem 0; }
-
-.message {
-  color: #707070;
-  font-size: 1.6rem;
-  font-weight: 700; }
-
-table {
-  width: 100%; }
-
-th, td {
-  padding: 1rem 0;
-  text-align: left; }
+.link-button {
+  text-decoration: none; }
 
 .container-login {
   padding: 8.4rem;
@@ -239,7 +291,7 @@ th, td {
   width: 100%;
   display: grid;
   grid-template-rows: repeat(1, min-content);
-  grid-template-columns: repeat(4, 0.2fr);
+  grid-template-columns: repeat(4, 0.22fr);
   grid-template-areas: "doing passed not-passed test-average";
   justify-content: space-between; }
 
@@ -255,7 +307,17 @@ th, td {
 #test-average-score {
   grid-area: test-average; }
 
-.subtitle-content {
-  display: block;
+.subtitle-content, .title-test {
   font-size: 2.4rem;
-  margin: 2.9rem 0; }
+  margin: 2.9rem 1.5rem 2.9rem 0; }
+
+.subtitle-content {
+  display: block; }
+
+.title-test-container {
+  display: block;
+  margin-bottom: 4rem; }
+
+.test-stats {
+  margin-top: 4rem;
+  margin-bottom: 6.5rem; }

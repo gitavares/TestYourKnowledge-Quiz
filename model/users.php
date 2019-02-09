@@ -1,7 +1,7 @@
 <?php
 
 // QUERIES
-function createUser() {
+function addUser() {
     global $connection;
 
     if(isset($_POST['submit'])){
@@ -31,8 +31,9 @@ function createUser() {
             mysqli_stmt_execute($stmt);
         
             if(!$stmt){
-                die('Query failed: '. mysqli_error());
+                die('Query failed: '. mysqli_error($connection));
             } else {
+                mysqli_stmt_close($stmt);
                 login();
             }
         } else {
@@ -53,9 +54,11 @@ function getUserByEmail($email){
     mysqli_stmt_store_result($stmt);
 
     if(mysqli_stmt_num_rows($stmt)){
+        mysqli_stmt_close($stmt);
         return true;
     }
 
+    mysqli_stmt_close($stmt);
     return false;
 }
 
@@ -85,13 +88,15 @@ function getUserData() {
             'status'=>$status,
             'admin'=>$admin
         ];
+        mysqli_stmt_close($stmt);
         return $user;
     } else {
+        mysqli_stmt_close($stmt);
         logout();
     }
 }
 
-function editUser() {
+function updateUser() {
     global $connection;
 
     if(isset($_POST['submit'])){
@@ -108,22 +113,24 @@ function editUser() {
         $address = mysqli_real_escape_string($connection, $address);
         $email = mysqli_real_escape_string($connection, $email);
 
-        $stmt = mysqli_prepare($connection, "UPDATE tb_users SET firstName = ?, lastName = ?, phone = ?, address = ? WHERE email = ?");
+        $stmt = mysqli_prepare($connection, "UPDATE tb_users SET firstName = ?, lastName = ?, phone = ?, address = ?, modifiedDate = NOW() WHERE email = ?");
         mysqli_stmt_bind_param($stmt, "sssss", $firstName, $lastName, $phone, $address, $email);
         mysqli_stmt_execute($stmt);
     
         if(!$stmt){
-            die('Query failed: '. mysqli_error());
-            return "Something got wrong. Please, try again.";
+            die('Query failed: '. mysqli_error($connection));
+            mysqli_stmt_close($stmt);
+            return "<div class='form-message-box-fail'>Something got wrong. Please, try again.</div>";
         } else {
-            return "Profile updated successfully!";
+            mysqli_stmt_close($stmt);
+            return "<div class='form-message-box-success'>Profile updated successfully!</div>";
         }
         
     }
 
 }
 
-function changePassword() {
+function updatePassword() {
     global $connection;
 
     if(isset($_POST['submit'])){
@@ -153,14 +160,17 @@ function changePassword() {
                 mysqli_stmt_execute($stmt);
             
                 if(!$stmt){
-                    die('Query failed: '. mysqli_error());
-                    return "Something got wrong. Please, try again.";
+                    die('Query failed: '. mysqli_error($connection));
+                    mysqli_stmt_close($stmt);
+                    return "<div class='form-message-box-fail'>Something got wrong. Please, try again.</div>";
                 } else {
-                    return "Password changed successfully!";
+                    mysqli_stmt_close($stmt);
+                    return "<div class='form-message-box-success'>Password changed successfully!</div>";
                 }
 
             } else {
-                return "Current Password incorrect";
+                mysqli_stmt_close($stmt);
+                return "<div class='form-message-box-fail'>Current Password incorrect</div>";
             }
         }
     }
@@ -192,14 +202,17 @@ function login(){
                 $_SESSION['email'] = $email;
                 $_SESSION['firstName'] = $firstName;
                 $_SESSION['lastName'] = $lastName;
-                $_SESSION['id'] = $id;
+                $_SESSION['userId'] = $id;
                 $_SESSION['admin'] = $admin;
+                mysqli_stmt_close($stmt);
                 redirectDashboard();
             } else {
+                mysqli_stmt_close($stmt);
                 return "Password incorrect";
             }
         }
 
+        mysqli_stmt_close($stmt);
         return "Email or Password incorrect";
     }
 

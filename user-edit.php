@@ -4,14 +4,14 @@
 
 <?php
 
-    getSession();
+getSession();
 
-    $message = "";
-    if(isset($_POST['submit'])){
-        $message = editUser();
-    } else {
-        $user = getUserData();
-    }
+$message = "";
+if(isset($_POST['submit'])){
+    $message = updateUser();
+} else {
+    $user = getUserData();
+}
 
 ?>
 
@@ -26,9 +26,7 @@
             <div>
                 <p>Email: <?php echo $_SESSION['email']; ?></p><br>
 
-                <div class="form-message-box">
-                    <span class="message"><?php echo $message; ?></span>
-                </div>
+                <?php echo $message; ?>
                 <form action="user-edit.php" method="post">
                     <div class="form-group">
                         <label for="firstName"><span class="label-text">First Name: </span>

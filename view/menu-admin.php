@@ -8,6 +8,7 @@
     <div class="main-menu">
         <a href="admin-dashboard.php" title="Dashboard" class="link-side-menu">Dashboard</a>
         <a href="admin-tests-list.php" title="Tests" class="link-side-menu">Tests</a>
+        <a href="admin-categories-list.php" title="Categories" class="link-side-menu">Categories</a>
         <a href="admin-tests-history.php" title="Tests History" class="link-side-menu">Tests History</a>
         <a href="admin-users-list.php" title="Users" class="link-side-menu">Users</a>
     </div>

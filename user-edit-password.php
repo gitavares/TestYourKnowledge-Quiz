@@ -8,7 +8,7 @@
 
     $message = "";
     if(isset($_POST['submit'])){
-        $message = changePassword();
+        $message = updatePassword();
     }
 
 ?>
@@ -24,9 +24,7 @@
             <div>
                 <p>Email: <?php echo $_SESSION['email']; ?></p><br>
 
-                <div class="form-message-box">
-                    <span class="message"><?php echo $message; ?></span>
-                </div>
+                <?php echo $message; ?>
                 <form action="user-edit-password.php" method="post">
                     <div class="form-group">
                         <input type="password" id="currentPassword" name="currentPassword" class="form-input" placeholder="Current Password" required>

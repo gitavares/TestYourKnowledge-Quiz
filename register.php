@@ -12,7 +12,7 @@
 
 // $users = new User($db);
 
-$message = createUser();
+$message = addUser();
 
 ?>
 <body>

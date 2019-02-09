@@ -10,4 +10,28 @@ thead {
 th, td {
     padding: 1rem 0;
     text-align: left;
+    vertical-align: top;
+}
+
+th, td {
+    
+}
+
+.tr-questions {
+    background-color: $color-secondary-light-4;
+    border-bottom: .2rem solid #FFF;
+}
+
+.table-questions {
+    border-spacing: 0;
+    margin-bottom: 4rem;
+}
+
+.td-questions {
+    padding: 1rem;
+    border-bottom: 3px solid #FFF;
+}
+
+.tb-button {
+    padding: 2.5rem 1.5rem;
 }

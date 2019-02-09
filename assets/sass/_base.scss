@@ -5,6 +5,7 @@ $color-secondary: #707070;
 $color-secondary-light-1: #E6E6E6;
 $color-secondary-light-2: #DBDBDB;
 $color-secondary-light-3: #D1D1D1;
+$color-secondary-light-4: #FAFAFA;
 
 $color-white: #FFF;
 $color-black: #000;
@@ -12,6 +13,14 @@ $color-black: #000;
 $color-shadow: rgba(255, 222, 43, .9);
 
 $font-color-default: $color-secondary;
+$font-color-success: rgb(3, 151, 70);
+$font-color-fail: rgb(170, 5, 5);
+
+$box-success-color:  rgb(158, 255, 201);
+$box-fail-color:  rgb(255, 179, 179);
+
+$box-border-success-color:  rgb(108, 224, 160);
+$box-border-fail-color:  rgb(223, 111, 111);
 
 $button-color-green: #28D100;
 $button-color-red: #FF4F38;
@@ -76,4 +85,8 @@ body {
 
 .m-b-10 {
     margin-bottom: 1rem;
+}
+
+.m-t-50 {
+    margin-top: 5rem;
 }

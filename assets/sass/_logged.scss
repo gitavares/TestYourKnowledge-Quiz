@@ -1,19 +1,20 @@
 .container {
-    height: 100vh;
+    min-height: 100vh;
 
     display: grid;
-    grid-template-rows: repeat(1, 100vh);
+    grid-template-rows: repeat(1, minmax(100vh, max-content));
     grid-template-columns: .25fr 1fr;
 
     grid-template-areas: "side main";
 }
 
 .side {
+    height: 100%;
     grid-area: side;
     background-color: $color-secondary-light-1;
 
     display: grid;
-    grid-template-rows: .2fr 1fr .2fr;
+    grid-template-rows: 10rem 1fr .2fr;
     grid-template-columns: repeat(1, 100%);
     grid-template-areas: "header" 
                          "main-menu" 
@@ -38,6 +39,7 @@
 .main-menu {
     width: 100%;
     grid-area: main-menu;
+    align-self: flex-start; 
     align-content: stretch;
 }
 
@@ -186,6 +188,50 @@
 .test-stats {
     margin-top: 4rem;
     margin-bottom: 6.5rem;
+}
+
+.questions-container {
+    margin-top: 3.5rem;
+}
+
+.question-container, .question{
+    margin-top: 1.8rem;
+}
+
+.question {
+    margin-bottom: 4rem;
+}
+
+.score {
+    font-size: $font-size-score;
+    font-weight: 700;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+
+    &-box {
+        text-align: center;
+    }
+
+    &-title {
+        font-size: $font-size-title;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+    }
+
+    &-text-result {
+        margin-top: 5rem;
+    }
+
+}
+
+.user-tests-box-nothing {
+    display: inline-block;
+    text-align: center;
+    font-size: $font-size-subtitle;
+    width: 100%;
+    margin-top: 5rem;
 }
 
 

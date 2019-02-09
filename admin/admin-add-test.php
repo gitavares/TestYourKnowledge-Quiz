@@ -3,6 +3,7 @@
 <?php include "../model/users.php"; ?>
 <?php include "../model/tests.php"; ?>
 <?php include "../model/questions.php"; ?>
+<?php include "../model/categories.php"; ?>
 
 <?php
 
@@ -13,7 +14,7 @@ if(!$_SESSION['admin']) {
 
 $message = "";
 if(isset($_POST['submit'])){
-    $message = createTest();
+    $message = addTest();
 }
 
 ?>
@@ -27,9 +28,7 @@ if(isset($_POST['submit'])){
                 <h2 class="page-title">Add a Test</h2>
             </div>
             <div>
-                <div class="form-message-box">
-                    <span class="message"><?php echo $message; ?></span>
-                </div>
+                <?php echo $message; ?>
                 <form action="admin-add-test.php" method="post">
                     <div class="form-group">
                         <label for="name"><span class="label-text">Test Name:</span>
@@ -41,6 +40,20 @@ if(isset($_POST['submit'])){
                         <label for="description"><span class="label-text">Description:</span>
                             <input type="text" name="description" class="form-input" placeholder="Description" title="Must have 2 letters or more" minlength=2 required
                             value="<?php echo isset($_POST["description"]) ? $_POST["description"] : ""; ?>">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="idCategory"><span class="label-text">Category:</span>
+                            <select name="idCategory" id="idCategory" class="form-input">
+                            <?php 
+                            $categories = getAllCategories();
+                            foreach ($categories as $category) {
+                            ?>
+                                <option value="<?php echo $category['id']; ?>" <?php echo isset($_POST['idCategory']) && $_POST['idCategory'] == $category['id'] ? 'selected' : ''; ?>><?php echo $category['name']; ?></option>
+                            <?php
+                            }
+                            ?>
+                            </select>
                         </label>
                     </div>
                     <div class="form-group">
