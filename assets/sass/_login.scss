@@ -7,6 +7,14 @@
     // grid-gap: 8.4rem;
 
     grid-template-areas: "head main";
+
+    @include respond(tab-port) {
+        padding: 1rem;
+        grid-template-rows: repeat(2, min-content);
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas: "head"
+                             "main";
+    }
 }
 
 .header-login {
@@ -37,6 +45,10 @@
     padding: 2.6rem;
     box-shadow: .3rem .3rem 0 $color-shadow;
     width: 45.8rem;
+
+    @include respond(tab-port) {
+        width: 100%;
+    }
 }
 
 .title-box-form {

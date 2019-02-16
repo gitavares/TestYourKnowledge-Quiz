@@ -1,18 +1,8 @@
 <?php include "view/header.php"; ?>
-<?php include "model/connection.php"; ?>
-<?php include "model/users.php"; ?>
 
 <?php
 
-// include_once "config/database.php";
-// include_once "object/users.php";
-
-// $database = new Database();
-// $db = $database->getConnection();
-
-// $users = new User($db);
-
-$message = addUser();
+$message = User::addUser();
 
 ?>
 <body>

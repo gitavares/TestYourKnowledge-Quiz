@@ -1,26 +1,47 @@
 <?php include "view/header.php"; ?>
-<?php include "model/connection.php"; ?>
-<?php include "model/users.php"; ?>
-<?php include "model/tests_results.php"; ?>
-<?php include "view/tests_results.php"; ?>
 
 <?php
 
-getSession();
+User::getSession();
 if($_SESSION['admin']) {
-    redirectAdminDashboard();
+    User::redirectAdminDashboard();
 }
 
-$testsResults = getAllTestsResultsByUserId();
+$testsResults = TestResult::getAllTestsResultsByUserId();
 $sum = 0;
 
 if(!empty($testsResults)){
     foreach($testsResults as $testResult){
-        $sum += $testResult['score'];
+        $sum += $testResult->getScore();
     }
 }
 
 $avg = count($testsResults) > 0 ? number_format(($sum / count($testsResults)), 1, '.', '') : '-';
+
+$allAverages = User::getAllUsersScoreAverages();
+
+$better = null;
+
+if(!empty($allAverages)){
+    $scoreAverage = 0;
+
+    foreach ($allAverages as $average) {
+        if($average['idUser'] == $_SESSION['userId']){
+            $scoreAverage = $average['userScoreAverage'];
+            break;
+        }
+    }
+
+    $countLowerScoreAvg = 0;
+    
+    foreach ($allAverages as $average) {
+        if($average['userScoreAverage'] < $scoreAverage) $countLowerScoreAvg++;
+    }
+
+    $better = ($countLowerScoreAvg / (count($allAverages) - 1)) * 100;
+}
+
+$better = $better == 100 ? $better.'%' : $better >= 0 ? number_format($better, 1, '.', '').'%' : '-';
 
 ?>
 
@@ -35,7 +56,7 @@ $avg = count($testsResults) > 0 ? number_format(($sum / count($testsResults)), 1
             <div class="statistic-user-box-container">
                 <div id="test-made" class="statistic-user-box">
                     <span class="statistic-user-box-title">You made</span>
-                    <span class="statistic-user-box-result"><?php echo count($testsResults); ?> Tests</span>
+                    <span class="statistic-user-box-result"><?php echo count($testsResults); ?> Test(s)</span>
                 </div>
                 <div id="average-score" class="statistic-user-box">
                     <span class="statistic-user-box-title">Your average score is</span>
@@ -43,7 +64,7 @@ $avg = count($testsResults) > 0 ? number_format(($sum / count($testsResults)), 1
                 </div>
                 <div id="better-than" class="statistic-user-box">
                     <span class="statistic-user-box-title">You are better than</span>
-                    <span class="statistic-user-box-result">73% of the users</span>
+                    <span class="statistic-user-box-result"><?php echo $better; ?> of the users</span>
                 </div>
             </div>
             <div>
@@ -57,7 +78,7 @@ $avg = count($testsResults) > 0 ? number_format(($sum / count($testsResults)), 1
                             <th>Test Name</th>
                             <th>Category</th>
                             <th>Score</th>
-                            <th>Status</th>
+                            <th>Result</th>
                             <th>Date</th>
                         </tr>
                     </thead>

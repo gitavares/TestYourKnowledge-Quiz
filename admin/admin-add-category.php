@@ -1,20 +1,10 @@
 <?php include "../view/header-admin.php"; ?>
-<?php include "../model/connection.php"; ?>
-<?php include "../model/users.php"; ?>
-<?php include "../model/tests.php"; ?>
-<?php include "../model/questions.php"; ?>
-<?php include "../model/categories.php"; ?>
 
 <?php
 
-getSession();
-if(!$_SESSION['admin']) {
-    redirectUserDashboard();
-}
-
 $message = "";
 if(isset($_POST['submit'])){
-    $message = addCategory();
+    $message = Category::addCategory();
 }
 
 ?>
@@ -26,6 +16,7 @@ if(isset($_POST['submit'])){
             <?php include "../view/welcome.php"; ?>
             <div class="page-title-box">
                 <h2 class="page-title">Add a Category</h2>
+                <h3><a class="link-form" href="admin-categories-list.php">&larr; Back</a></h3>
             </div>
             <div>
                 <?php echo $message; ?>

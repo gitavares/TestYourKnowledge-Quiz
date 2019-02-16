@@ -26,6 +26,9 @@ body {
 .m-t-50 {
   margin-top: 5rem; }
 
+.m-t-20 {
+  margin-top: 2rem; }
+
 .form-group {
   margin-bottom: 1.8rem; }
 
@@ -34,7 +37,11 @@ body {
   padding: 1rem;
   outline: none;
   width: 100%;
-  font-size: 1.6rem; }
+  font-size: 1.6rem;
+  font-family: "Nanum Gothic", sans-serif; }
+
+input[type=date] {
+  padding: .8rem; }
 
 .form-input:focus {
   border: 1px solid #FFDE2B; }
@@ -57,7 +64,7 @@ body {
   display: inline-block;
   padding: 1rem;
   width: 100%;
-  color: #039746;
+  color: #03b955;
   font-size: 1.6rem;
   font-weight: 700;
   background-color: #9effc9;
@@ -68,7 +75,7 @@ body {
   display: inline-block;
   padding: 1rem;
   width: 100%;
-  color: #aa0505;
+  color: #d12424;
   font-size: 1.6rem;
   font-weight: 700;
   background-color: #ffb3b3;
@@ -91,10 +98,47 @@ body {
 .arrow-down {
   float: right; }
 
+select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  height: 4rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.filter-form-box {
+  width: 100%;
+  display: grid;
+  grid-template-rows: repeat(1fr);
+  grid-template-columns: repeat(3, 0.25fr) 0.1fr;
+  grid-template-areas: "date username orderby filterbutton";
+  justify-content: space-between; }
+  .filter-form-box-date {
+    grid-area: date; }
+  .filter-form-box-username {
+    grid-area: username; }
+  .filter-form-box-orderby {
+    grid-area: orderby; }
+  .filter-form-box-filterbutton {
+    grid-area: filterbutton;
+    align-self: end; }
+  @media only screen and (max-width: 37.5em) {
+    .filter-form-box {
+      grid-template-rows: repeat(4, min-content);
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas: "date" "username" "orderby" "filterbutton"; } }
+
 table {
   width: 100%;
   margin-top: 3rem;
   border-spacing: .5rem; }
+  @media only screen and (max-width: 56.25em) {
+    table {
+      border-spacing: .3rem;
+      font-size: 0.9rem; } }
 
 th, td {
   padding: 1rem 0;
@@ -129,6 +173,22 @@ th, td {
 
 .link-button {
   text-decoration: none; }
+  @media only screen and (max-width: 37.5em) {
+    .link-button {
+      border-spacing: .3rem;
+      font-size: 1.4rem;
+      text-align: center;
+      margin-top: 2rem;
+      display: block; } }
+
+.chart {
+  width: 100%;
+  height: 100%; }
+
+.chart-box {
+  margin-top: 4rem;
+  margin-bottom: 6.5rem;
+  width: 100%; }
 
 .container-login {
   padding: 8.4rem;
@@ -136,6 +196,12 @@ th, td {
   grid-template-rows: repeat(1, max-content);
   grid-template-columns: .5fr 1fr;
   grid-template-areas: "head main"; }
+  @media only screen and (max-width: 56.25em) {
+    .container-login {
+      padding: 1rem;
+      grid-template-rows: repeat(2, min-content);
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas: "head" "main"; } }
 
 .header-login {
   grid-area: head; }
@@ -162,6 +228,9 @@ th, td {
   padding: 2.6rem;
   box-shadow: 0.3rem 0.3rem 0 rgba(255, 222, 43, 0.9);
   width: 45.8rem; }
+  @media only screen and (max-width: 56.25em) {
+    .box-form {
+      width: 100%; } }
 
 .title-box-form {
   text-align: center;
@@ -197,6 +266,9 @@ th, td {
   grid-template-rows: repeat(1, minmax(100vh, max-content));
   grid-template-columns: .25fr 1fr;
   grid-template-areas: "side main"; }
+  @media only screen and (max-width: 37.5em) {
+    .container {
+      grid-template-columns: .1fr 1fr; } }
 
 .side {
   height: 100%;
@@ -212,11 +284,7 @@ th, td {
   padding: 2.9rem 2.4rem; }
 
 .header {
-  grid-area: header;
-  display: grid;
-  grid-template-rows: repeat(1, 10rem);
-  grid-template-columns: 1fr .2fr;
-  grid-template-areas: "brand collapsed-menu"; }
+  grid-area: header; }
 
 .main-menu {
   width: 100%;
@@ -230,13 +298,13 @@ th, td {
   align-self: flex-end; }
 
 .brand {
-  padding: 1rem;
-  grid-area: brand; }
+  padding: 1rem; }
 
-.collapsed-menu {
-  grid-area: collapsed-menu;
-  justify-self: right;
-  align-self: flex-end; }
+.menu-text {
+  display: inline-block; }
+  @media only screen and (max-width: 37.5em) {
+    .menu-text {
+      display: none; } }
 
 .brand-title,
 .brand-title-link,
@@ -251,6 +319,36 @@ th, td {
   text-decoration: none;
   color: #707070;
   outline: none; }
+
+@media only screen and (max-width: 37.5em) {
+  .brand-title-link,
+  .brand-title-link:hover,
+  .brand-title-link:focus,
+  .brand-title-link:active {
+    display: none; } }
+
+.brand-title-link-small,
+.brand-title-link-small:hover,
+.brand-title-link-small:focus,
+.brand-title-link-small:active {
+  font-size: 2.2rem;
+  text-shadow: 0.2rem 0.2rem 0 rgba(255, 222, 43, 0.9);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: #707070;
+  outline: none;
+  display: none; }
+  @media only screen and (max-width: 37.5em) {
+    .brand-title-link-small,
+    .brand-title-link-small:hover,
+    .brand-title-link-small:focus,
+    .brand-title-link-small:active {
+      display: inline-block;
+      font-size: 6rem;
+      text-align: center;
+      margin-left: .7rem; } }
 
 .link-side-menu,
 .link-side-menu:link,
@@ -289,6 +387,11 @@ th, td {
     grid-template-columns: repeat(3, 0.3fr);
     grid-template-areas: "made average better";
     justify-content: space-between; }
+    @media only screen and (max-width: 56.25em) {
+      .statistic-user-box-container {
+        grid-template-rows: repeat(3, min-content);
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas: "made" "average" "better"; } }
   .statistic-user-box-title {
     display: block;
     margin-bottom: 1.5rem; }
@@ -311,6 +414,11 @@ th, td {
   grid-template-columns: repeat(4, 0.22fr);
   grid-template-areas: "doing passed not-passed test-average";
   justify-content: space-between; }
+  @media only screen and (max-width: 56.25em) {
+    .statistic-admin-box-container {
+      grid-template-rows: repeat(4, min-content);
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas: "doing" "passed" "not-passed" "test-average"; } }
 
 #doing-test {
   grid-area: doing; }

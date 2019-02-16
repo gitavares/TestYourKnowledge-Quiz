@@ -1,10 +1,8 @@
 <?php include "view/header.php"; ?>
-<?php include "model/connection.php"; ?>
-<?php include "model/users.php"; ?>
 
 <?php 
 
-$message = login();
+$message = User::login();
 
 ?>
 <body>

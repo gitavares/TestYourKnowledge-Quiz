@@ -1,19 +1,4 @@
 <?php include "../view/header-admin.php"; ?>
-<?php include "../model/connection.php"; ?>
-<?php include "../model/users.php"; ?>
-<?php include "../model/tests.php"; ?>
-<?php include "../model/questions.php"; ?>
-<?php include "../model/categories.php"; ?>
-<?php include "../view/categories.php"; ?>
-
-<?php
-
-getSession();
-if(!$_SESSION['admin']) {
-    redirectUserDashboard();
-}
-
-?>
 
 <body>
     <div class="container">
@@ -35,7 +20,7 @@ if(!$_SESSION['admin']) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php showAllCategories(getAllCategories()); ?>
+                    <?php showAllCategories(Category::getAllCategories()); ?>
                 </tbody>
             </table>
             

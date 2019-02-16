@@ -1,34 +1,36 @@
 <aside class="side">
     <div class="header">
         <div class="brand">
-            <h1><span class="brand-title"><a class="brand-title-link" href="<?php echo getUrlDirPath(); ?>dashboard" title="Back to Dahsboard Page">Test<br>Your<br>Knowledge</a></span></h1>
+            <h1><span class="brand-title">
+                <a class="brand-title-link" href="dashboard.php" title="Back to Dahsboard Page">Test<br>Your<br>Knowledge</a>
+                <a class="brand-title-link-small" href="dashboard.php" title="Back to Dahsboard Page">T</a>
+            </span></h1>
         </div>
-        <div class="collapsed-menu">=</div>
     </div>
 
     <?php
         if(!$_SESSION['admin']) { 
     ?>
     <div class="main-menu">
-        <a href="<?php echo getUrlDirPath(); ?>dashboard" title="Dashboard" class="link-side-menu">Dashboard</a>
-        <a href="<?php echo getUrlDirPath(); ?>take-a-test" title="Make a Test" class="link-side-menu">Take a Test</a>
+        <a href="dashboard.php" title="Dashboard" class="link-side-menu"><i class="fas fa-tachometer-alt"></i> <span class="menu-text">Dashboard</span></a>
+        <a href="take-a-test.php" title="Make a Test" class="link-side-menu"><i class="fas fa-edit"></i> <span class="menu-text">Take a Test</span></a>
     </div>
     <?php
         } else {
     ?>
     <div class="main-menu">
-        <a href="<?php echo getUrlDirPath(); ?>admin/admin-dashboard.php" title="Dashboard" class="link-side-menu">Dashboard</a>
-        <a href="<?php echo getUrlDirPath(); ?>admin/admin-tests-list.php" title="Tests" class="link-side-menu">Tests</a>
-        <a href="<?php echo getUrlDirPath(); ?>admin/admin-tests-history.php" title="Tests History" class="link-side-menu">Tests History</a>
-        <a href="<?php echo getUrlDirPath(); ?>admin/admin-users-list.php" title="Users" class="link-side-menu">Users</a>
+        <a href="admin/admin-dashboard.php" title="Dashboard" class="link-side-menu"><i class="fas fa-tachometer-alt"></i> <span class="menu-text">Dashboard</span></a>
+        <a href="admin/admin-tests-list.php" title="Tests" class="link-side-menu"><i class="fas fa-edit"></i> <span class="menu-text">Tests</span></a>
+        <a href="admin/admin-categories-list.php" title="Categories" class="link-side-menu"><i class="fas fa-tags"></i> <span class="menu-text">Categories</span></a>
+        <a href="admin/admin-users-stats.php" title="Users Stats" class="link-side-menu"><i class="fas fa-users"></i> <span class="menu-text">Users Stats</span></a>
     </div>
     <?php
         }
     ?>
     <div class="footer-menu">               
-        <a href="<?php echo getUrlDirPath(); ?>user-edit" title="Edit Profile" class="link-side-menu">Edit Profile</a>
-        <a href="<?php echo getUrlDirPath(); ?>user-edit-password" title="Change Password" class="link-side-menu">Change Password</a>
-        <a href="<?php echo getUrlDirPath(); ?>logout.php" title="Logout" class="link-side-menu">Logout</a>
+        <a href="user-edit.php" title="Edit Profile" class="link-side-menu"><i class="fas fa-user-edit"></i> <span class="menu-text">Edit Profile</span></a>
+        <a href="user-edit-password.php" title="Change Password" class="link-side-menu"><i class="fas fa-key"></i> <span class="menu-text">Change Password</span></a>
+        <a href="logout.php" title="Logout" class="link-side-menu"><i class="fas fa-sign-out-alt"></i> <span class="menu-text">Logout</span></a>
     </div>
     
 </aside>

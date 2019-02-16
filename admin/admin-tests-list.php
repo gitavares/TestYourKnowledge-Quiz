@@ -1,18 +1,4 @@
 <?php include "../view/header-admin.php"; ?>
-<?php include "../model/connection.php"; ?>
-<?php include "../model/users.php"; ?>
-<?php include "../model/tests.php"; ?>
-<?php include "../view/tests.php"; ?>
-<?php include "../model/questions.php"; ?>
-
-<?php
-
-getSession();
-if(!$_SESSION['admin']) {
-    redirectUserDashboard();
-}
-
-?>
 
 <body>
     <div class="container">
@@ -37,7 +23,7 @@ if(!$_SESSION['admin']) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php showAllTestsAdmin(getAllTests()); ?>
+                    <?php showAllTestsAdmin(Test::getAllTests()); ?>
                 </tbody>
             </table>
             

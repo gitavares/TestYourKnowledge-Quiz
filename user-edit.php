@@ -1,16 +1,14 @@
 <?php include "view/header.php"; ?>
-<?php include "model/connection.php"; ?>
-<?php include "model/users.php"; ?>
 
 <?php
 
-getSession();
+User::getSession();
 
 $message = "";
 if(isset($_POST['submit'])){
-    $message = updateUser();
+    $message = User::updateUser();
 } else {
-    $user = getUserData();
+    $user = User::getUserData();
 }
 
 ?>
@@ -31,25 +29,25 @@ if(isset($_POST['submit'])){
                     <div class="form-group">
                         <label for="firstName"><span class="label-text">First Name: </span>
                             <input type="text" name="firstName" class="form-input" placeholder="First Name" pattern="[A-Za-z ]{2,}" title="Must have 2 letters or more" minlength=2 autofocus required
-                            value="<?php echo isset($_POST["firstName"]) ? $_POST["firstName"] : $user['firstName']; ?>">
+                            value="<?php echo isset($_POST["firstName"]) ? $_POST["firstName"] : $user->getFirstName(); ?>">
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="lastName"><span class="label-text">Last Name: </span>
                             <input type="text" name="lastName" class="form-input" placeholder="Last Name" pattern="[A-Za-z ]{2,}" title="Must have 2 letters or more" minlength=2 required
-                            value="<?php echo isset($_POST["lastName"]) ? $_POST["lastName"] : $user['lastName']; ?>">
+                            value="<?php echo isset($_POST["lastName"]) ? $_POST["lastName"] : $user->getLastName(); ?>">
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="phone"><span class="label-text">Phone: </span>
                             <input type="tel" name="phone" class="form-input" placeholder="Phone Number" pattern="[0-9]{10}" title="Must have 10 numbers" required
-                            value="<?php echo isset($_POST["phone"]) ? $_POST["phone"] : $user['phone']; ?>">
+                            value="<?php echo isset($_POST["phone"]) ? $_POST["phone"] : $user->getPhone(); ?>">
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="address"><span class="label-text">Address: </span>
                             <input type="text" name="address" class="form-input" placeholder="Address" pattern="[\w',-\\/.\s]{4,}" title="" minlength=4 required
-                            value="<?php echo isset($_POST["address"]) ? $_POST["address"] : $user['address']; ?>">
+                            value="<?php echo isset($_POST["address"]) ? $_POST["address"] : $user->getAddress(); ?>">
                         </label>
                     </div>
                     <div class="form-group">

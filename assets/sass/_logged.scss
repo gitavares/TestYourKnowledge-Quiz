@@ -6,6 +6,10 @@
     grid-template-columns: .25fr 1fr;
 
     grid-template-areas: "side main";
+
+    @include respond(phone) {
+        grid-template-columns: .1fr 1fr;
+    }
 }
 
 .side {
@@ -18,7 +22,7 @@
     grid-template-columns: repeat(1, 100%);
     grid-template-areas: "header" 
                          "main-menu" 
-                         "footer-menu"
+                         "footer-menu";
 }
 
 .main {
@@ -30,10 +34,10 @@
 .header {
     grid-area: header;
 
-    display: grid;
-    grid-template-rows: repeat(1, 10rem);
-    grid-template-columns: 1fr .2fr;
-    grid-template-areas: "brand collapsed-menu";
+    // display: grid;
+    // grid-template-rows: repeat(1, 10rem);
+    // grid-template-columns: 1fr .2fr;
+    // grid-template-areas: "brand collapsed-menu";
 }
 
 .main-menu {
@@ -51,14 +55,23 @@
 
 .brand {
     padding: 1rem;
-    grid-area: brand;
+    // grid-area: brand;
 }
 
-.collapsed-menu {
-    grid-area: collapsed-menu;
-    justify-self: right;
-    align-self: flex-end;
+.menu-text {
+
+    display: inline-block;
+
+    @include respond(phone) {
+        display: none;
+    }
 }
+
+// .collapsed-menu {
+//     grid-area: collapsed-menu;
+//     justify-self: right;
+//     align-self: flex-end;
+// }
 
 .brand-title,
 .brand-title-link,
@@ -73,6 +86,39 @@
     text-decoration: none;
     color: $font-color-default;
     outline: none;
+}
+
+.brand-title-link,
+.brand-title-link:hover,
+.brand-title-link:focus,
+.brand-title-link:active {
+
+    @include respond(phone) {
+        display: none;
+    }
+
+}
+
+.brand-title-link-small,
+.brand-title-link-small:hover,
+.brand-title-link-small:focus,
+.brand-title-link-small:active {
+    font-size: $font-size-brand-default;
+    text-shadow: .2rem .2rem 0 $color-shadow;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: $font-family-brand;
+    text-decoration: none;
+    color: $font-color-default;
+    outline: none;
+    display: none;
+
+    @include respond(phone) {
+        display: inline-block;
+        font-size: $font-size-brand-main-responsive;
+        text-align: center;
+        margin-left: .7rem;
+    }
 }
 
 .link-side-menu,
@@ -120,6 +166,14 @@
         grid-template-areas: "made average better";
 
         justify-content: space-between;
+
+        @include respond(tab-port) {
+            grid-template-rows: repeat(3, min-content);
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-areas: "made"
+                                 "average"
+                                 "better";
+        }
     }
 
     &-title {
@@ -153,6 +207,15 @@
     grid-template-areas: "doing passed not-passed test-average";
 
     justify-content: space-between;
+
+    @include respond(tab-port) {
+        grid-template-rows: repeat(4, min-content);
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas: "doing"
+                             "passed"
+                             "not-passed"
+                             "test-average";
+    }
 }
 
 #doing-test {
@@ -233,6 +296,8 @@
     width: 100%;
     margin-top: 5rem;
 }
+
+
 
 
 

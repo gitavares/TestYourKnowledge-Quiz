@@ -1,199 +1,309 @@
 <?php
 
-function addQuestion() {
-    global $connection;
+class Question {
 
-    if(isset($_POST['submit']) && $_SESSION['admin']){
+    private $id;
+    private $idTest;
+    private $question;
+    private $option1;
+    private $option2;
+    private $option3;
+    private $option4;
+    private $correctOption;
+    private $status;
+    private $createdDate;
+    private $modifiedDate;
 
-        $question = $_POST['question'];
-        $option1 = $_POST['option1'];
-        $option2 = $_POST['option2'];
-        $option3 = $_POST['option3'];
-        $option4 = $_POST['option4'];
-        $correctOption = $_POST['correctOption'];
+    public function __construct() { }
 
-        $question = mysqli_real_escape_string($connection, $question);
-        $option1 = mysqli_real_escape_string($connection, $option1);
-        $option2 = mysqli_real_escape_string($connection, $option2);
-        $option3 = mysqli_real_escape_string($connection, $option3);
-        $option4 = mysqli_real_escape_string($connection, $option4);
-        $correctOption = mysqli_real_escape_string($connection, $correctOption);
-        $idTest = $_SESSION['testId'];
-
-        // save question
-        $stmt = mysqli_prepare($connection, "INSERT INTO tb_questions(idTest, question, option1, option2, option3, option4, correctOption) VALUES (?,?,?,?,?,?,?)");
-        mysqli_stmt_bind_param($stmt, "issssss", $idTest, $question, $option1, $option2, $option3, $option4, $correctOption);
-        mysqli_stmt_execute($stmt);
-    
-        if(!$stmt){
-            $message = "<div class='form-message-box-fail'>Question not added.". die('Query failed: '. mysqli_error($connection)) ."</div>";
-            mysqli_stmt_close($stmt);
-            return $message;
-        } else {
-            $message = "<div class='form-message-box-success'>Question added successfully</div>";
-            mysqli_stmt_close($stmt);
-            header("Location: admin-edit-test.php?testId={$idTest}&message={$message}");
-        }
-        
+    public function getId(){
+        return $this->id;
     }
 
-}
+    public function setId($id){
+        $this->id = $id;
+    }
 
-function getAllQuestionsByTestId(){
-    global $connection;
+    public function getIdTest(){
+        return $this->idTest;
+    }
 
-    $testId = $_SESSION['testId'];
+    public function setIdTest($idTest){
+        $this->idTest = $idTest;
+    }
 
-    $testId = mysqli_real_escape_string($connection, $testId);
+    public function getQuestion(){
+        return $this->question;
+    }
 
-    $stmt = mysqli_prepare($connection, "SELECT id, idTest, question, option1, option2, option3, option4, correctOption FROM tb_questions WHERE idTest = ?");
-    mysqli_stmt_bind_param($stmt, "i", $testId);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-    mysqli_stmt_bind_result($stmt, $id, $idTest, $question, $option1, $option2, $option3, $option4, $correctOption);
+    public function setQuestion($question){
+        $this->question = $question;
+    }
 
-    $testQuestions = [];
+    public function getOption1(){
+        return $this->option1;
+    }
 
-    if(mysqli_stmt_num_rows($stmt)) {
-        while(mysqli_stmt_fetch($stmt)){
-            $testQuestion = [];
+    public function setOption1($option1){
+        $this->option1 = $option1;
+    }
 
-            $testQuestion = [
-                'id'=>$id, 
-                'idTest'=>$idTest, 
-                'question'=>$question, 
-                'option1'=>$option1, 
-                'option2'=>$option2, 
-                'option3'=>$option3, 
-                'option4'=>$option4, 
-                'correctOption'=>$correctOption
-            ];
+    public function getOption2(){
+        return $this->option2;
+    }
 
-            array_push($testQuestions, $testQuestion);
+    public function setOption2($option2){
+        $this->option2 = $option2;
+    }
+
+    public function getOption3(){
+        return $this->option3;
+    }
+
+    public function setOption3($option3){
+        $this->option3 = $option3;
+    }
+
+    public function getOption4(){
+        return $this->option4;
+    }
+
+    public function setOption4($option4){
+        $this->option4 = $option4;
+    }
+    
+    public function getCorrectOption(){
+        return $this->correctOption;
+    }
+
+    public function setCorrectOption($correctOption){
+        $this->correctOption = $correctOption;
+    }
+
+    public function getStatus(){
+        return $this->status;
+    }
+
+    public function setStatus($status){
+        $this->status = $status;
+    }
+
+    public function getCreatedDate(){
+        return $this->createdDate;
+    }
+
+    public function setCreatedDate($createdDate){
+        $this->createdDate = $createdDate;
+    }
+
+    public function getModifiedDate(){
+        return $this->modifiedDate;
+    }
+
+    public function setModifiedDate($modifiedDate){
+        $this->modifiedDate = $modifiedDate;
+    }
+
+
+    public static function addQuestion() {
+        global $database;
+    
+        if(isset($_POST['submit']) && $_SESSION['admin']){
+    
+            $invalid = "&lt;p&gt;&amp;nbsp;&lt;/p&gt;";
+    
+            $question = trim(htmlspecialchars($_POST['question']));
+            $option1 = trim(htmlspecialchars($_POST['option1']));
+            $option2 = trim(htmlspecialchars($_POST['option2']));
+            $option3 = trim(htmlspecialchars($_POST['option3']));
+            $option4 = trim(htmlspecialchars($_POST['option4']));
+    
+            if($question != $invalid && $option1 != $invalid && $option2 != $invalid && $option3 != $invalid && $option4 != $invalid){
+                $correctOption = $_POST['correctOption'];
+        
+                $correctOption = $database->escape_string($correctOption);
+                $idTest = $_SESSION['testId'];
+        
+                // save question
+                if($stmt = $database->prepare("INSERT INTO tb_questions(idTest, question, option1, option2, option3, option4, correctOption) VALUES (?,?,?,?,?,?,?)")){
+                    $stmt->bind_param("issssss", $idTest, $question, $option1, $option2, $option3, $option4, $correctOption);
+                    $stmt->execute();
+                
+                    if(!$stmt){
+                        $message = "<div class='form-message-box-fail'>Question not added.". die('Query failed: '. mysqli_error($database)) ."</div>";
+                        $stmt->close();
+                        return $message;
+                    } else {
+                        $message = "<div class='form-message-box-success'>Question added successfully</div>";
+                        $stmt->close();
+                        header("Location: admin-edit-test.php?testId={$idTest}&message={$message}");
+                    }
+                }
+            } else {
+                $message = "<div class='form-message-box-fail'>All fields must be filled.</div>";
+                return $message;
+            }
+            
         }
-        mysqli_stmt_close($stmt);
+    
+    }
+    
+    public static function getAllQuestionsByTestId(){
+        global $database;
+    
+        $testId = $_SESSION['testId'];
+    
+        $testId = $database->escape_string($testId);
+
+        $testQuestions = [];
+    
+        if($stmt = $database->prepare("SELECT id, idTest, question, option1, option2, option3, option4, correctOption, status FROM tb_questions WHERE idTest = ?")){
+            $stmt->bind_param("i", $testId);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($id, $idTest, $question, $option1, $option2, $option3, $option4, $correctOption, $status);
+        
+            if($stmt->num_rows) {
+                while($stmt->fetch()){
+                    $questionObject = new self;
+
+                    $status = ($status ? "Active" : "Inactive");
+
+                    $questionObject->setId($id);
+                    $questionObject->setIdTest($idTest);
+                    $questionObject->setQuestion($question);
+                    $questionObject->setOption1($option1);
+                    $questionObject->setOption2($option2);
+                    $questionObject->setOption3($option3);
+                    $questionObject->setOption4($option4);
+                    $questionObject->setCorrectOption($correctOption);
+                    $questionObject->setStatus($status);
+
+                    $testQuestions[] = $questionObject;
+                }
+            }
+            $stmt->close();
+        }
         return $testQuestions;
     }
-    mysqli_stmt_close($stmt);
-    return null;
-
-}
-
-function getQuestionsByTestIdRandomly(){
-    global $connection;
-
-    $testId = $_SESSION['testId'];
-
-    $testId = mysqli_real_escape_string($connection, $testId);
-
-    $test = getTestData();
-    $numQuestions = $test['numQuestions'];
-
-    $stmt = mysqli_prepare($connection, "SELECT id, idTest, question, option1, option2, option3, option4, correctOption FROM tb_questions WHERE idTest = ?");
-    mysqli_stmt_bind_param($stmt, "i", $testId);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-    mysqli_stmt_bind_result($stmt, $id, $idTest, $question, $option1, $option2, $option3, $option4, $correctOption);
-
-    $testQuestions = [];
-
-    if(mysqli_stmt_num_rows($stmt)) {
-        while(mysqli_stmt_fetch($stmt)){
-            $testQuestion = [];
-
-            $testQuestion = [
-                'id'=>$id, 
-                'idTest'=>$idTest, 
-                'question'=>$question, 
-                'option1'=>$option1, 
-                'option2'=>$option2, 
-                'option3'=>$option3, 
-                'option4'=>$option4, 
-                'correctOption'=>$correctOption
-            ];
-
-            array_push($testQuestions, $testQuestion);
-        }
-    }
     
-    mysqli_stmt_close($stmt);
-
-    shuffle($testQuestions);
-    array_slice($testQuestions, 0, $numQuestions);
-
-    return $testQuestions;
-
-}
-
-function updateQuestion(){
-
-    global $connection;
-
-    if(isset($_POST['submit']) && $_SESSION['admin']){
-
-        $question = $_POST['question'];
-        $option1 = $_POST['option1'];        
-        $option2 = $_POST['option2'];
-        $option3 = $_POST['option3'];
-        $option4 = $_POST['option4'];
-        $correctOption = $_POST['correctOption'];
-        $questionId = $_SESSION['questionId'];
-
-        $question = mysqli_real_escape_string($connection, $question);
-        $option1 = mysqli_real_escape_string($connection, $option1);
-        $option2 = mysqli_real_escape_string($connection, $option2);
-        $option3 = mysqli_real_escape_string($connection, $option3);
-        $option4 = mysqli_real_escape_string($connection, $option4);
-        $correctOption = mysqli_real_escape_string($connection, $correctOption);
-        $questionId = mysqli_real_escape_string($connection, $questionId);
-
-        $stmt = mysqli_prepare($connection, "UPDATE tb_questions SET question = ?, option1 = ?, option2 = ?, option3 = ?, option4 = ?, correctOption = ?, modifiedDate = NOW() WHERE id = ?");
-        mysqli_stmt_bind_param($stmt, "ssssssi", $question, $option1, $option2, $option3, $option4, $correctOption, $questionId);
-        mysqli_stmt_execute($stmt);
+    public static function getQuestionsByTestIdRandomly(){
+        global $database;
     
-        if(!$stmt){
-            die('Query failed: '. mysqli_error($connection));
-            mysqli_stmt_close($stmt);
-            return "<div class='form-message-box-fail'>Something got wrong. Please, try again.</div>";
-        }
+        $testId = $_SESSION['testId'];
+    
+        $testId = $database->escape_string($testId);
+    
+        $test = Test::getTestData();
+        $numQuestions = $test->getNumQuestions();
+
+        $testQuestions = [];
+    
+        if($stmt = $database->prepare("SELECT id, idTest, question, option1, option2, option3, option4, correctOption FROM tb_questions WHERE idTest = ?")){
+            $stmt->bind_param("i", $testId);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($id, $idTest, $question, $option1, $option2, $option3, $option4, $correctOption);
         
-        mysqli_stmt_close($stmt);
-        return "<div class='form-message-box-success'>Question updated successfully!</div>";
-    }
+            if($stmt->num_rows) {
+                while($stmt->fetch()){
+                    $questionObject = new self;
 
-}
+                    $questionObject->setId($id);
+                    $questionObject->setIdTest($idTest);
+                    $questionObject->setQuestion($question);
+                    $questionObject->setOption1($option1);
+                    $questionObject->setOption2($option2);
+                    $questionObject->setOption3($option3);
+                    $questionObject->setOption4($option4);
+                    $questionObject->setCorrectOption($correctOption);
 
-function getQuestionData(){
-    global $connection;
-
-    $questionId = $_SESSION['questionId'];
-
-    $questionId = mysqli_real_escape_string($connection, $questionId);
-
-    $stmt = mysqli_prepare($connection, "SELECT id, question, option1, option2, option3, option4, correctOption FROM tb_questions WHERE id = ?");
-    mysqli_stmt_bind_param($stmt, "i", $questionId);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-    mysqli_stmt_bind_result($stmt, $id, $question, $option1, $option2, $option3, $option4, $correctOption);
-
-    if(mysqli_stmt_num_rows($stmt)) {
-        mysqli_stmt_fetch($stmt);
-        $question = [
-            'id'=>$id, 
-            'question'=>$question, 
-            'option1'=>$option1, 
-            'option2'=>$option2, 
-            'option3'=>$option3, 
-            'option4'=>$option4, 
-            'correctOption'=>$correctOption
-        ];
-        mysqli_stmt_close($stmt);
-        return $question;
+                    $testQuestions[] = $questionObject;
+                }
+            }
+            
+            $stmt->close();
+            
+            shuffle($testQuestions);
+            array_slice($testQuestions, 0, $numQuestions);
+        }
+    
+        return $testQuestions;
     }
     
-    mysqli_stmt_close($stmt);
-    return null;
-}
+    public static function updateQuestion(){
+    
+        global $database;
+    
+        if(isset($_POST['submit']) && $_SESSION['admin']){
+    
+            $question = htmlspecialchars($_POST['question']);
+            $option1 = htmlspecialchars($_POST['option1']);        
+            $option2 = htmlspecialchars($_POST['option2']);
+            $option3 = htmlspecialchars($_POST['option3']);
+            $option4 = htmlspecialchars($_POST['option4']);
+            $correctOption = $_POST['correctOption'];
+            $status = $_POST['status'];
+            $questionId = $_SESSION['questionId'];
+    
+            $correctOption = $database->escape_string($correctOption);
+            $status = $database->escape_string($status);
+            $questionId = $database->escape_string($questionId);
+    
+            if($stmt = $database->prepare("UPDATE tb_questions SET question = ?, option1 = ?, option2 = ?, option3 = ?, option4 = ?, correctOption = ?, status = ?, modifiedDate = NOW() WHERE id = ?")){
+                $stmt->bind_param("ssssssii", $question, $option1, $option2, $option3, $option4, $correctOption, $status, $questionId);
+                $stmt->execute();
+            
+                if(!$stmt){
+                    die('Query failed: '. mysqli_error($database));
+                    $stmt->close();
+                    return "<div class='form-message-box-fail'>Something got wrong. Please, try again.</div>";
+                }
+                
+                $stmt->close();
+            }
+            return "<div class='form-message-box-success'>Question updated successfully!</div>";
+        }
+    
+    }
+    
+    public static function getQuestionData(){
+        global $database;
+    
+        $questionId = $_SESSION['questionId'];
+    
+        $questionId = $database->escape_string($questionId);
 
+        $questionObject = new self;
+    
+        if($stmt = $database->prepare("SELECT id, idTest, question, option1, option2, option3, option4, correctOption, status FROM tb_questions WHERE id = ?")){
+            $stmt->bind_param("i", $questionId);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($id, $idTest, $question, $option1, $option2, $option3, $option4, $correctOption, $status);
+        
+            if($stmt->num_rows) {
+                $stmt->fetch();
+        
+                $status = ($status ? "Active" : "Inactive");
+
+                $questionObject->setId($id);
+                $questionObject->setIdTest($idTest);
+                $questionObject->setQuestion($question);
+                $questionObject->setOption1($option1);
+                $questionObject->setOption2($option2);
+                $questionObject->setOption3($option3);
+                $questionObject->setOption4($option4);
+                $questionObject->setCorrectOption($correctOption);
+                $questionObject->setStatus($status);
+                
+            }
+            
+            $stmt->close();
+        }
+        return $questionObject;
+    }
+
+}
 
 ?>

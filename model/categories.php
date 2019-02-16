@@ -1,132 +1,174 @@
 <?php
 
-function addCategory() {
-    global $connection;
+class Category {
 
-    if(isset($_POST['submit']) && $_SESSION['admin']){
+    private $id;
+    private $name;
+    private $createdDate;
+    private $modifiedDate;
 
-        $name = $_POST['name'];
+    public function __construct() { }
 
-        $name = mysqli_real_escape_string($connection, $name);
+    public function getId(){
+        return $this->id;
+    }
 
-        if(!getCategoryByName($name)){
-            $stmt = mysqli_prepare($connection, "INSERT INTO tb_categories(name) VALUES (?)");
-            mysqli_stmt_bind_param($stmt, "s", $name);
-            mysqli_stmt_execute($stmt);
-        
-            if(!$stmt){
-                die('Query failed: '. mysqli_error($connection));
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function getName(){
+        return $this->name;
+    }
+
+    public function setName($name){
+        $this->name = $name;
+    }
+
+    public function getCreatedDate(){
+        return $this->createdDate;
+    }
+
+    public function setCreatedDate($createdDate){
+        $this->createdDate = $createdDate;
+    }
+
+    public function getModifiedDate(){
+        return $this->modifiedDate;
+    }
+
+    public function setModifiedDate($modifiedDate){
+        $this->modifiedDate = $modifiedDate;
+    }
+
+
+    public static function addCategory() {
+        global $database;
+    
+        if(isset($_POST['submit']) && $_SESSION['admin']){
+    
+            $name = $_POST['name'];
+    
+            $name = $database->escape_string($name);
+    
+            if(!Category::getCategoryByName($name)){
+                if($stmt = $database->prepare("INSERT INTO tb_categories(name) VALUES (?)")){
+                    $stmt->bind_param("s", $name);
+                    $stmt->execute();
+                
+                    if(!$stmt){
+                        die('Query failed: '. mysqli_error($database));
+                    } else {
+                        $_SESSION['categoryId'] = $database->the_insert_id();
+                        $stmt->close();
+                        return "<div class='form-message-box-success'>Category created successfully!</div>";
+                    }
+                    $stmt->close();
+                }
             } else {
-                $_SESSION['categoryId'] = mysqli_insert_id($connection);
-                mysqli_stmt_close($stmt);
-                header("Location: admin-edit-category.php");
+                return "<div class='form-message-box-fail'>A Category with this name already exist. Please, choose another name.</div>";
             }
-            mysqli_stmt_close($stmt);
-        } else {
-            return "<div class='form-message-box-fail'>A Category with this name already exist. Please, choose another name.</div>";
         }
-    }
-
-}
-
-function getCategoryByName($name){
-    global $connection;
-
-    $name = mysqli_real_escape_string($connection, $name);
-
-    $stmt = mysqli_prepare($connection, "SELECT name FROM tb_categories WHERE name = ?");
-    mysqli_stmt_bind_param($stmt, "s", $name);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-
-    if(mysqli_stmt_num_rows($stmt)){
-        mysqli_stmt_close($stmt);
-        return true;
-    }
-
-    mysqli_stmt_close($stmt);
-    return false;
-}
-
-function getCategoryData() {
-    global $connection;
-
-    $categoryId = $_SESSION['categoryId'];
-
-    $categoryId = mysqli_real_escape_string($connection, $categoryId);
-
-    $stmt = mysqli_prepare($connection, "SELECT id, name FROM tb_categories WHERE id = ?");
-    mysqli_stmt_bind_param($stmt, "i", $categoryId);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-    mysqli_stmt_bind_result($stmt, $id, $name);
-
-    if(mysqli_stmt_num_rows($stmt)) {
-        mysqli_stmt_fetch($stmt);
-        $category = [
-            'id'=>$id, 
-            'name'=>$name
-        ];
-        mysqli_stmt_close($stmt);
-        return $category;
+    
     }
     
-    mysqli_stmt_close($stmt);
-    return null;
+    public static function getCategoryByName($name){
+        global $database;
     
-}
-
-function updateCategory() {
-    global $connection;
-
-    if(isset($_POST['submit']) && $_SESSION['admin']){
-
-        $name = $_POST['name'];
-        $categoryId = $_SESSION['categoryId'];
-
-        $name = mysqli_real_escape_string($connection, $name);
-        $categoryId = mysqli_real_escape_string($connection, $categoryId);
-
-        $stmt = mysqli_prepare($connection, "UPDATE tb_categories SET name = ?, modifiedDate = NOW() WHERE id = ?");
-        mysqli_stmt_bind_param($stmt, "si", $name, $categoryId);
-        mysqli_stmt_execute($stmt);
+        $name = $database->escape_string($name);
     
-        if(!$stmt){
-            die('Query failed: '. mysqli_error($connection));
-            mysqli_stmt_close($stmt);
-            return "<div class='form-message-box-fail'>Something got wrong. Please, try again.</div>";
-        }
+        if($stmt = $database->prepare("SELECT name FROM tb_categories WHERE name = ?")){
+            $stmt->bind_param("s", $name);
+            $stmt->execute();
+            $stmt->store_result();
         
-        mysqli_stmt_close($stmt);
-        return "<div class='form-message-box-success'>Category updated successfully!</div>";
+            if($stmt->num_rows){
+                $stmt->close();
+                return true;
+            }
+        
+            $stmt->close();
+        }
+        return false;
     }
-
-}
-
-function getAllCategories(){ // change it and the others with the same approach. separate the 
-    global $connection;
-
-    $query = "SELECT * FROM tb_categories";
-
-    $result = mysqli_query($connection, $query);
     
-    $categories = [];
+    public static function getCategoryData() {
+        global $database;
+    
+        $categoryId = $_SESSION['categoryId'];
+    
+        $categoryId = $database->escape_string($categoryId);
 
-    if(mysqli_num_rows($result)) {
-        while($row = mysqli_fetch_assoc($result)){
+        $categoryObject = new self;
+    
+        if($stmt = $database->prepare("SELECT id, name FROM tb_categories WHERE id = ?")){
+            $stmt->bind_param("i", $categoryId);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($id, $name);
+        
+            if($stmt->num_rows) {
+                $stmt->fetch();
 
-            $category = [];
-
-            $category = [
-                'id'=>$row['id'], 
-                'name'=>$row['name']
-            ];
-
-            array_push($categories, $category);
-        } 
+                $categoryObject->setId($id);
+                $categoryObject->setName($name);
+            }
+            
+            $stmt->close();
+        }
+        return $categoryObject;
+        
     }
+    
+    public static function updateCategory() {
+        global $database;
+    
+        if(isset($_POST['submit']) && $_SESSION['admin']){
+    
+            $name = $_POST['name'];
+            $categoryId = $_SESSION['categoryId'];
+    
+            $name = $database->escape_string($name);
+            $categoryId = $database->escape_string($categoryId);
+    
+            if($stmt = $database->prepare("UPDATE tb_categories SET name = ?, modifiedDate = NOW() WHERE id = ?")){
+                $stmt->bind_param("si", $name, $categoryId);
+                $stmt->execute();
+            
+                if(!$stmt){
+                    die('Query failed: '. mysqli_error($database));
+                    $stmt->close();
+                    return "<div class='form-message-box-fail'>Something got wrong. Please, try again.</div>";
+                }
+                
+                $stmt->close();
+            }
+            return "<div class='form-message-box-success'>Category updated successfully!</div>";
+        }
+    
+    }
+    
+    public static function getAllCategories(){
+        global $database;
+    
+        $query = "SELECT * FROM tb_categories";
+    
+        $result = $database->query($query);
+        
+        $categories = [];
+    
+        if($result->num_rows) {
+            while($row = $result->fetch_assoc()){
+                $categoryObject = new self;
 
-    return $categories;
+                $categoryObject->setId($row['id']);
+                $categoryObject->setName($row['name']);
+
+                $categories[] = $categoryObject;
+            } 
+        }
+        return $categories;
+    }
 
 }
 

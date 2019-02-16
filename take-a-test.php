@@ -1,23 +1,19 @@
 <?php include "view/header.php"; ?>
-<?php include "model/connection.php"; ?>
-<?php include "model/users.php"; ?>
-<?php include "model/tests.php"; ?>
-<?php include "view/tests.php"; ?>
-<?php include "model/questions.php"; ?>
-<?php include "model/categories.php"; ?>
-<?php include "model/tests_results.php"; ?>
-<?php include "model/tests_answers.php"; ?>
 
 <?php
 
-getSession();
+User::getSession();
+
+$_SESSION['countQuestion'] = 0;
+$_SESSION['testNumQuestions'] = null;
+$_SESSION['questionsTest'] = null;
+$_SESSION['testId'] = null;
+$_SESSION['testResultId'] = null;
+$_SESSION['testAnswerId'] = null;
 
 if(isset($_GET['testId'])){
     $_SESSION['testId'] = $_GET['testId'];
-    $_SESSION['countQuestion'] = 0;
-    $_SESSION['testNumQuestions'] = null;
-    $_SESSION['questionsTest'] = null;
-    addTestResult();
+    TestResult::addTestResult();
     header("Location: take-a-test-start.php");
 }
 
@@ -35,10 +31,10 @@ if(isset($_GET['testId'])){
                 <div class="form-group">
                     <select name="idCategory" id="idCategory" class="form-input">
                         <?php 
-                        $categories = getAllCategories();
+                        $categories = Category::getAllCategories();
                         foreach ($categories as $category) {
                         ?>
-                            <option value="<?php echo $category['id']; ?>" <?php echo isset($_POST['idCategory']) && $_POST['idCategory'] == $category['id'] ? 'selected' : ''; ?>><?php echo $category['name']; ?></option>
+                            <option value="<?php echo $category->getId(); ?>" <?php echo isset($_POST['idCategory']) && $_POST['idCategory'] == $category->getId() ? 'selected' : ''; ?>><?php echo $category->getName(); ?></option>
                         <?php
                             }
                         ?>
@@ -62,7 +58,7 @@ if(isset($_GET['testId'])){
                     </tr>
                 </thead>
                 <tbody>
-                    <?php showAllTestsUser(getAllTestsToMakeATest($category)); ?>
+                    <?php showAllTestsUser(Test::getAllTestsToMakeATest($category)); ?>
                 </tbody>
             </table>
             <?php 

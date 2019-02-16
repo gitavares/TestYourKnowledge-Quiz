@@ -1,15 +1,13 @@
 <?php include "view/header.php"; ?>
-<?php include "model/connection.php"; ?>
-<?php include "model/users.php"; ?>
 
 <?php
 
-    getSession();
+User::getSession();
 
-    $message = "";
-    if(isset($_POST['submit'])){
-        $message = updatePassword();
-    }
+$message = "";
+if(isset($_POST['submit'])){
+    $message = User::updatePassword();
+}
 
 ?>
 

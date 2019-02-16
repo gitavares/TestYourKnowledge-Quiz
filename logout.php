@@ -1,4 +1,4 @@
 <?php include "model/users.php"?>
 <?php 
-    logout();
+    User::logout();
 ?>

@@ -8,3 +8,26 @@ function confirmPasswordCheck() {
         document.getElementById("error-message").innerHTML = "";
     }
 }
+
+// function loadUsersOnline() {
+//     console.log("HERE!!")
+
+//     setInterval(function() {
+//         { location.reload(1); }
+//     }, 500)
+// }
+
+// $(document).ready(function(){
+//     $('#selectAllCheckboxes').click(function(event){
+//         if(this.checked){
+//             $('.checkBoxes').each(function() {
+//                 this.checked = true;
+//             })
+//         } else {
+//             $('.checkBoxes').each(function() {
+//                 this.checked = false;
+//             })
+//         }
+//     })
+// })
+

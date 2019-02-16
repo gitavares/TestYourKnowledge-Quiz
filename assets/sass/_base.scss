@@ -13,8 +13,8 @@ $color-black: #000;
 $color-shadow: rgba(255, 222, 43, .9);
 
 $font-color-default: $color-secondary;
-$font-color-success: rgb(3, 151, 70);
-$font-color-fail: rgb(170, 5, 5);
+$font-color-success: #03b955;
+$font-color-fail: #d12424;
 
 $box-success-color:  rgb(158, 255, 201);
 $box-fail-color:  rgb(255, 179, 179);
@@ -26,10 +26,12 @@ $button-color-green: #28D100;
 $button-color-red: #FF4F38;
 
 // fonts size
+$font-size-mini: .9rem;
 $font-size-small: 1.4rem;
 $font-size-default: 1.6rem;
 $font-size-title-form: 1.8rem;
 $font-size-brand-main: 4rem;
+$font-size-brand-main-responsive: 6rem;
 $font-size-brand-default: 2.2rem;
 $font-size-title: 3rem;
 $font-size-subtitle: 2.4rem;
@@ -74,6 +76,7 @@ html {
     @include respond(tab-port) { // considering width < 600px
         font-size: 50%; // 8px/16px
     }
+
 }
 
 body {
@@ -89,4 +92,8 @@ body {
 
 .m-t-50 {
     margin-top: 5rem;
+}
+
+.m-t-20 {
+    margin-top: 2rem;
 }
