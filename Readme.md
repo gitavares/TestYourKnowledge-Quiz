@@ -16,6 +16,6 @@ Users:
 - dolacy@dolacy.com / 123456
 - homer@homer.com / 123456
 
-# Database info
+# MySQL database info
 
 See the file model/connection.php. Change with your data.
