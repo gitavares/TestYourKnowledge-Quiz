@@ -1,4 +1,4 @@
-# Dependecies
+# Dependencies
 
 There are only dev dependencies. Don't worry about install anything by NPM.
 
