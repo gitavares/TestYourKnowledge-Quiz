@@ -2,7 +2,7 @@
 
 There are only dev dependencies. Don't worry about install anything by NPM.
 
-# Settings
+# Gulp Settings
 
 Change the file "settings.js" with your path.
 
