@@ -6,6 +6,11 @@ There are only dev dependencies. Don't worry about install anything by NPM.
 
 Change the file "settings.js" with your path.
 
+# MySQL database info
+
+- Import the "test_your_knowledge.sql" to create the DB tables, inserts, etc.
+- See the file model/connection.php. Change with your data.
+
 # Users to test
 
 Admin: 
@@ -15,7 +20,3 @@ Users:
 - gitavares@gmail.com / 123456
 - dolacy@dolacy.com / 123456
 - homer@homer.com / 123456
-
-# MySQL database info
-
-See the file model/connection.php. Change with your data.
