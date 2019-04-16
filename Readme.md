@@ -17,6 +17,5 @@ Admin:
 - admin@admin.com / 123456
 
 Users:
-- gitavares@gmail.com / 123456
 - dolacy@dolacy.com / 123456
 - homer@homer.com / 123456
